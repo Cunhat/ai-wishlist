@@ -1,6 +1,6 @@
 "use client";
 
-import { Atom, Eclipse, Frame, Map, PieChart, Rabbit } from "lucide-react";
+import { Atom, Frame, Map, PieChart } from "lucide-react";
 
 import { NavProjects } from "@/components/nav-projects";
 import { NavUser } from "@/components/nav-user";

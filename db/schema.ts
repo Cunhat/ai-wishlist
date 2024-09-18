@@ -5,15 +5,16 @@ export const pocket = sqliteTable("pocket", {
   id: integer("id", {
     mode: "number",
   }).primaryKey({ autoIncrement: true }),
-  userId: integer("user_id").notNull(),
-  name: text("title").notNull(),
+  userId: text("user_id").notNull(),
+  name: text("name").notNull(),
   amount: real("amount").notNull(),
 });
 
 export const wishlist = sqliteTable("wishlist", {
   id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
-  userId: integer("user_id").notNull(),
-  name: text("title").notNull(),
+  userId: text("user_id").notNull(),
+  name: text("name").notNull(),
+  emoji: text("emoji").notNull(),
 });
 
 export const category = sqliteTable("category", {
@@ -21,7 +22,7 @@ export const category = sqliteTable("category", {
   name: text("name").notNull(),
   icon: text("icon").notNull(),
   color: text("color").notNull(),
-  userId: integer("user_id").notNull(),
+  userId: text("user_id").notNull(),
   wishlistId: integer("wishlist_id").references(() => wishlist.id).notNull(),
 });
 
