@@ -8,13 +8,9 @@ import { useAction } from "next-safe-action/hooks";
 import { createWishlist } from "./actions";
 import { Loader2 } from "lucide-react";
 import { Label } from "@/components/ui/label";
+import { createWishlistSchema } from "./validations";
 
-const schema = z.object({
-  name: z.string().min(1),
-  emoji: z.string().emoji().min(1).max(1),
-});
-
-type WishlistSchema = z.infer<typeof schema>;
+type WishlistSchema = z.infer<typeof createWishlistSchema>;
 
 type CreateWishlistFormProps = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -26,21 +22,22 @@ export function CreateWishlistForm({
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<WishlistSchema>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(createWishlistSchema),
   });
 
   const { execute, isExecuting } = useAction(createWishlist, {
     onSuccess: () => {
-      console.log("Success");
       setOpen(false);
+    },
+    onError: (error) => {
+      console.error(error);
     },
   });
 
   const onSubmit: SubmitHandler<WishlistSchema> = (data) => {
-    execute({ name: data.name });
+    execute({ name: data.name, emoji: data.emoji });
   };
 
   return (
