@@ -36,6 +36,7 @@ export default async function DashboardLayout({
     name: wishlist.name,
     icon: wishlist.emoji,
     url: `/wishlist/${wishlist.id}`,
+    id: wishlist.id,
   }));
 
   return (

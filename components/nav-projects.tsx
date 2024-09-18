@@ -1,15 +1,15 @@
+import { MoreHorizontal } from "lucide-react";
 import Link from "next/link";
-import { MoreHorizontal, PlusSquare, type LucideIcon } from "lucide-react";
 
-import { cn } from "@/lib/utils";
+import DeleteWishlist from "@/app/(dashboard)/wishlist/delete-wishlist";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { cn } from "@/lib/utils";
 import CreateWishlist from "../app/(dashboard)/wishlist/create-wishlist";
 
 export function NavProjects({
@@ -20,6 +20,7 @@ export function NavProjects({
     name: string;
     url: string;
     icon: string;
+    id: number;
   }[];
 } & React.ComponentProps<"ul">) {
   return (
@@ -49,10 +50,8 @@ export function NavProjects({
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent side="right" align="start" sideOffset={20}>
-              <DropdownMenuItem>Delete</DropdownMenuItem>
+              <DeleteWishlist id={item.id} />
               <DropdownMenuItem>Rename</DropdownMenuItem>
-              {/* <DropdownMenuSeparator />
-              <DropdownMenuItem>Archive</DropdownMenuItem> */}
             </DropdownMenuContent>
           </DropdownMenu>
         </li>

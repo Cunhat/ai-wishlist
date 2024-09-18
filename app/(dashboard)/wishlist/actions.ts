@@ -3,9 +3,11 @@
 import { db } from "@/db"
 import { wishlist } from "@/db/schema"
 import { authenticatedActionClient } from "@/lib/safe-action"
-import { createWishlistSchema } from "./validations"
+import { createWishlistSchema, deleteWishlistSchema } from "./validations"
 
 import { revalidatePath } from "next/cache"
+import { eq, and } from "drizzle-orm"
+import { redirect } from "next/navigation"
 
 
 
@@ -18,5 +20,14 @@ export const createWishlist = authenticatedActionClient.schema(createWishlistSch
         })
 
         revalidatePath("/")
+    }
+)
+
+export const deleteWishlist = authenticatedActionClient.schema(deleteWishlistSchema).action(
+    async ({parsedInput: {id}, ctx: {user}}) => {
+        await db.delete(wishlist).where(and(eq(wishlist.id, id), eq(wishlist.userId, user.id)))
+
+        // revalidatePath("/")
+        redirect("/")
     }
 )

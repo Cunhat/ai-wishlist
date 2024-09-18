@@ -31,7 +31,7 @@ const data = {
 export function AppSidebar({
   wishlists,
 }: {
-  wishlists: { name: string; icon: string; url: string }[];
+  wishlists: { name: string; icon: string; url: string; id: number }[];
 }) {
   return (
     <Sidebar>
