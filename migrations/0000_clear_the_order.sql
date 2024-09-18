@@ -3,12 +3,12 @@ CREATE TABLE `category` (
 	`name` text NOT NULL,
 	`icon` text NOT NULL,
 	`color` text NOT NULL,
-	`user_id` integer NOT NULL,
+	`user_id` text NOT NULL,
 	`wishlist_id` integer NOT NULL,
 	FOREIGN KEY (`wishlist_id`) REFERENCES `wishlist`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
-CREATE TABLE `items` (
+CREATE TABLE `item` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`name` text NOT NULL,
 	`price` real NOT NULL,
@@ -20,15 +20,14 @@ CREATE TABLE `items` (
 --> statement-breakpoint
 CREATE TABLE `pocket` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
-	`user_id` integer NOT NULL,
-	`title` text NOT NULL,
+	`user_id` text NOT NULL,
+	`name` text NOT NULL,
 	`amount` real NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE `wishlist` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
-	`user_id` integer NOT NULL,
-	`title` text NOT NULL
+	`user_id` text NOT NULL,
+	`name` text NOT NULL,
+	`emoji` text NOT NULL
 );
---> statement-breakpoint
-DROP TABLE `user`;
