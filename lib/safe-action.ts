@@ -15,5 +15,5 @@ export const authenticatedActionClient = createSafeActionClient({
         throw new Error("User not found")
     }
     
-    return next({ ctx: { user } });;
+    return next({ ctx: { user } });
   });

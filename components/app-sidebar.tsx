@@ -26,27 +26,13 @@ const data = {
     email: "m@example.com",
     avatar: "/avatars/shadcn.jpg",
   },
-
-  projects: [
-    {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
-    },
-  ],
 };
 
-export function AppSidebar() {
+export function AppSidebar({
+  wishlists,
+}: {
+  wishlists: { name: string; icon: string; url: string }[];
+}) {
   return (
     <Sidebar>
       <SidebarHeader>
@@ -55,7 +41,7 @@ export function AppSidebar() {
       <SidebarContent>
         <SidebarItem>
           <SidebarLabel>Wishlists</SidebarLabel>
-          <NavProjects projects={data.projects} />
+          <NavProjects projects={wishlists} />
         </SidebarItem>
       </SidebarContent>
       <SidebarFooter>
