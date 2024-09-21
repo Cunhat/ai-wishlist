@@ -11,21 +11,18 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import CreateWishlist from "../app/(dashboard)/wishlist/create-wishlist";
+import EditWishlist from "@/app/(dashboard)/wishlist/edit-wishlist";
+import { Wishlist } from "@/app/(dashboard)/wishlist/validations";
 
 export function NavProjects({
-  projects,
+  wishlists,
   className,
 }: {
-  projects: {
-    name: string;
-    url: string;
-    icon: string;
-    id: number;
-  }[];
+  wishlists: Wishlist[];
 } & React.ComponentProps<"ul">) {
   return (
     <ul className={cn("grid gap-0.5", className)}>
-      {projects.map((item) => (
+      {wishlists.map((item) => (
         <li
           key={item.name}
           className="has-[[data-state=open]]:bg-accent has-[[data-state=open]]:text-accent-foreground group relative rounded-md hover:bg-accent hover:text-accent-foreground"
@@ -34,7 +31,7 @@ export function NavProjects({
             href={item.url}
             className="flex h-7 items-center gap-2.5 overflow-hidden rounded-md px-1.5 text-xs outline-none ring-ring transition-all hover:bg-accent hover:text-accent-foreground focus-visible:ring-2"
           >
-            <p className="text-base">{item.icon}</p>
+            <p className="text-base">{item.emoji}</p>
             <div className="line-clamp-1 grow overflow-hidden pr-6 font-medium text-sm">
               {item.name}
             </div>
@@ -51,7 +48,7 @@ export function NavProjects({
             </DropdownMenuTrigger>
             <DropdownMenuContent side="right" align="start" sideOffset={20}>
               <DeleteWishlist id={item.id} />
-              <DropdownMenuItem>Rename</DropdownMenuItem>
+              <EditWishlist wishlist={item} />
             </DropdownMenuContent>
           </DropdownMenu>
         </li>

@@ -7,6 +7,7 @@ import { eq } from "drizzle-orm";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { redirect } from "next/navigation";
+import { Wishlist } from "./wishlist/validations";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,7 +35,7 @@ export default async function DashboardLayout({
 
   const wishlists = wishlistsQuery.map((wishlist) => ({
     name: wishlist.name,
-    icon: wishlist.emoji,
+    emoji: wishlist.emoji,
     url: `/wishlist/${wishlist.id}`,
     id: wishlist.id,
   }));
@@ -44,11 +45,8 @@ export default async function DashboardLayout({
       defaultOpen={cookies().get("sidebar:state")?.value === "true"}
     >
       <AppSidebar wishlists={wishlists} />
-      <main className="flex flex-1 flex-col p-2 transition-all duration-300 ease-in-out">
-        <div className="h-full rounded-md border-2 border-dashed p-2">
-          <SidebarTrigger />
-          {children}
-        </div>
+      <main className="flex flex-1 flex-col p-6 transition-all duration-300 ease-in-out">
+        {children}
       </main>
     </SidebarLayout>
   );

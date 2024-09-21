@@ -27,7 +27,7 @@ export default function DeleteWishlist({ id }: { id: number }) {
 
   return (
     <DropdownMenuItem
-      onClick={(e) => {
+      onSelect={(e) => {
         e.preventDefault();
       }}
     >

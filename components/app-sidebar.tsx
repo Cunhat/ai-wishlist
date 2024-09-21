@@ -1,7 +1,7 @@
 "use client";
 
-import { Atom, Frame, Map, PieChart } from "lucide-react";
-
+import { Atom } from "lucide-react";
+import { Wishlist } from "@/app/(dashboard)/wishlist/validations";
 import { NavProjects } from "@/components/nav-projects";
 import { NavUser } from "@/components/nav-user";
 import { TeamSwitcher } from "@/components/team-switcher";
@@ -13,6 +13,7 @@ import {
   SidebarItem,
   SidebarLabel,
 } from "@/components/ui/sidebar";
+
 const data = {
   teams: [
     {
@@ -28,11 +29,7 @@ const data = {
   },
 };
 
-export function AppSidebar({
-  wishlists,
-}: {
-  wishlists: { name: string; icon: string; url: string; id: number }[];
-}) {
+export function AppSidebar({ wishlists }: { wishlists: Wishlist[] }) {
   return (
     <Sidebar>
       <SidebarHeader>
@@ -41,7 +38,7 @@ export function AppSidebar({
       <SidebarContent>
         <SidebarItem>
           <SidebarLabel>Wishlists</SidebarLabel>
-          <NavProjects projects={wishlists} />
+          <NavProjects wishlists={wishlists} />
         </SidebarItem>
       </SidebarContent>
       <SidebarFooter>
